@@ -61,11 +61,11 @@ public class GAg implements BranchPredictor {
     @Override
     public void update(BranchInstruction instruction, BranchResult actual) {
         // TODO: complete Task 2
+        Bit[] sc = CombinationalLogic.count(SC.read(), BranchResult.isTaken(actual), CountMode.SATURATING);
         Bit[] BHR_val = BHR.read();
 
 
-        Bit[] sc = CombinationalLogic.count(SC.read(), BranchResult.isTaken(actual), CountMode.SATURATING);
-        PHT.putIfAbsent(BHR_val, sc);
+        PHT.put(BHR_val, sc);
         if (actual == BranchResult.TAKEN)
             BHR.insert(Bit.ONE);
         else
