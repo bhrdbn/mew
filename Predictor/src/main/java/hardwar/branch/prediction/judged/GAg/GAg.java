@@ -45,7 +45,7 @@ public class GAg implements BranchPredictor {
         // TODO : complete Task 1
 
         Bit[] BHR_val = BHR.read();
-        SC.load(PHT.get(BHR_val));
+        SC.load(PHT.setDefault(BHR_val,getDefaultBlock() ));
         if (SC.read()[0]==Bit.ZERO)
             return BranchResult.NOT_TAKEN;
         else
@@ -63,12 +63,12 @@ public class GAg implements BranchPredictor {
         // TODO: complete Task 2
         Bit[] BHR_val = BHR.read();
 
-        
+
         Bit[] sc = CombinationalLogic.count(SC.read(), BranchResult.isTaken(actual), CountMode.SATURATING);
-        PHT.put(BHR_val, sc);
+        PHT.putIfAbsent(BHR_val, sc);
         if (actual == BranchResult.TAKEN)
             BHR.insert(Bit.ONE);
-        else 
+        else
             BHR.insert(Bit.ZERO);
 
     }
