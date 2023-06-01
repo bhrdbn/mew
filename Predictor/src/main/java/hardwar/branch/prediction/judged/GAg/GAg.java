@@ -28,7 +28,7 @@ public class GAg implements BranchPredictor {
 
 
         // Initialize the PHT with a size of 2^size and each entry having a saturating counter of size "SCSize"
-        PHT = new PageHistoryTable(2^BHRSize,SCSize);
+        PHT = new PageHistoryTable(1 << BHRSize,SCSize);
 
         // Initialize the SC register
         SC = new SIPORegister("sc", SCSize, null);
